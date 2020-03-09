@@ -1,0 +1,233 @@
+* {
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+}
+
+ul, li {
+   display: block;
+   list-style: none;
+}
+
+body {
+   background-color: #eee;
+   font-family: 'Roboto Slab', serif;
+}
+
+.App {
+   max-width: 1140px;
+   margin: 0 auto;
+   background-color: #fff;
+}
+
+.header {
+   background-color: #00B060;
+   padding: 20px 40px;
+   display: flex;
+   align-items: center;
+
+
+   &__logo {
+      height: 30px;
+      margin-right: 20px;
+      display: block;
+   }
+}
+
+h1 {
+   color: #fff;
+   font-family: 'Lato', sans-serif;
+   font-size: 28px;
+}
+
+.Body {
+   background-color: #fff;
+   padding: 20px 40px;
+   min-height: 90vh;
+}
+
+.task {
+   padding: 15px 20px;
+   border-bottom: 1px solid #ccc;
+   display: flex;
+   align-items: center;
+
+   &:not(:last-child) {
+      margin-bottom: 10px;
+   }
+
+   &__text {
+      margin-right: 10px;
+      cursor: pointer;
+      width: 100%;
+   }
+
+   input {
+      cursor: pointer;
+   }
+
+   input:checked + .task__text {
+      text-decoration: line-through;
+   }
+
+   // Start of styles for checkbox---------------------------------
+   &__checkbox {
+      position: absolute;
+      z-index: -1;
+      opacity: 0;
+      margin: 10px 0 0 20px;
+   }
+   &__checkbox + label {
+      position: relative;
+      cursor: pointer;
+      padding-left: 50px;
+   }
+   &__checkbox + label:before {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 0;
+      width: 20px;
+      height: 20px;
+      border: 2px solid lightgreen;
+      border-radius: 50%;
+      transform: translateY(-50%);
+      transition: all .2s ease;
+   }
+
+   &__checkbox:checked + label:before {
+      background: lightgreen;
+   }
+
+   // End of styles for checkbox-----------------------------------
+
+
+   // Delete task button styles
+   &__delete {
+      margin-left: auto;
+      cursor: pointer;
+      background: none;
+      border: none;
+      font-size: 16px;
+      color: transparent;
+      transition: all .3s ease;
+      outline: none;
+      padding: 5px 10px;
+
+      &:hover {
+         color: rgb(181, 240, 181);
+      }
+   }
+
+   &:hover .task__delete {
+      color: lightgreen;
+   }
+}
+
+.addTask {
+   display: flex;
+
+   &__input {
+      font-family: 'Roboto Slab', serif;
+      font-size: 16px;
+      padding: 7px 15px;
+      margin-right: 15px;
+      height: 40px;
+      border: 1px solid #00B060;
+      width: 100%;
+   }
+
+   button {
+      font-family: 'Roboto Slab', serif;
+      height: 40px;
+      padding: 0 15px;
+      cursor: pointer;
+      background-color: #00B060;
+      color: #fff;
+      font-size: 16px;
+      border: none;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      max-width: 135px;
+      width: 100%;
+
+      &:hover {
+         opacity: 0.85;
+      }
+   }
+
+   &:not(:last-child) {
+      margin-bottom: 15px;
+   }
+}
+
+.clearAll {
+   margin-left: auto;
+   font-family: 'Roboto Slab', serif;
+   height: 40px;
+   padding: 0 15px;
+   cursor: pointer;
+   font-size: 16px;
+   border: none;
+   transition: all 0.3s ease;
+   flex-shrink: 0;
+   outline: none;
+   max-width: 135px;
+   width: 100%;
+   margin-top: 10px;
+}
+
+
+@media (max-width: 992px) {
+   .task {
+      &__delete {
+         color: lightgreen;
+      }
+   }
+}
+
+@media (max-width: 576px) {
+   .Body {
+      padding: 15px 20px;
+   }
+
+   .header {
+      padding: 20px;
+   }
+
+   .task {
+      padding: 10px 15px;
+
+      &:not(:last-child) {
+         margin-bottom: 5px;
+      }
+
+      &__checkbox + label {
+         padding-left: 40px;
+         margin-right: 5px;
+      }
+   }
+}
+
+@media (max-width: 480px) {
+   .task {
+      &__text {
+         font-size: 14px;
+      }
+
+      &__checkbox + label {
+         padding-left: 35px;
+
+         &:before {
+            width: 15px;
+            height: 15px;
+         }
+      }
+   }
+
+   .addTask {
+      input, button {
+         font-size: 14px;
+      }
+   }
+}

@@ -1,0 +1,13 @@
+import React from 'react';
+import logo from '../logo512.png';
+
+const Header = () => {
+   return (
+      <header className="header">
+         <img className="header__logo" src={logo} alt="React"></img>
+         <h1>Do your stuff</h1>
+      </header>
+   );
+};
+
+export default Header;
