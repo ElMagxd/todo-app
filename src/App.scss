@@ -35,8 +35,13 @@ body {
       display: block;
    }
 
-   .logout-button {
+   &__user {
       margin-left: auto;
+      margin-right: 15px;
+      color: #fff;
+   }
+
+   .logout-button {
       font-family: $slab;
       height: 40px;
       padding: 0 15px;

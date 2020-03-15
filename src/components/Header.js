@@ -9,6 +9,7 @@ const Header = () => {
       <header className="header">
          <img className="header__logo" src={logo} alt="React"></img>
          <h1>Do your stuff</h1>
+         <p className='header__user'>{user && user.email}</p>
          {user && <LogoutButton/>}
       </header>
    );

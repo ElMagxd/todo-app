@@ -58,11 +58,8 @@ const Body = () => {
    };
 
    useEffect(() => {
-      
       getUserData(user.email);
    }, []);
-   // getUserData(user.email);
-
 
    let jsonData = '[]';
    if (userData != null) jsonData = userData.tasks;
