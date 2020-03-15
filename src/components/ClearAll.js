@@ -1,11 +1,16 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 
 const ClearAll = props => {
+   const user = useSelector(state => state.user);
+
    const clearAllData = () => {
       localStorage.clear();
       const newState = props.setState;
-      newState('[]');
+      newState(user.email, {tasks: '[]'});
    }
+
    return (
       <button
          className="clearAll"

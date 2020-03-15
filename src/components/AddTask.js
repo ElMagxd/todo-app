@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 
 const AddTask = props => {
    const [inputValue, setInputValue] = useState('');
+   const user = useSelector(state => state.user);
+   const userData = useSelector(state => state.userData);
    
    let tasksData;
-   localStorage.length < 1 ? tasksData = [] : tasksData = JSON.parse(localStorage.getItem('tasksData'));
+   // localStorage.length < 1 ? tasksData = [] : tasksData = JSON.parse(localStorage.getItem('tasksData'));
+   !userData ? tasksData = [] : tasksData = JSON.parse(userData.tasks);
 
-   const setJsonData = props.setState;
+   // const setJsonData = props.setState;
 
    const changedInputValue = event => {
       setInputValue(event.target.value);
@@ -33,8 +37,8 @@ const AddTask = props => {
          completed: false
       };
       tasksData.push(newTask);
-      localStorage.setItem('tasksData', JSON.stringify(tasksData));
-      setJsonData(JSON.stringify(tasksData));
+      const setFireData = props.setUserDataFn;
+      setFireData(user.email, {tasks: JSON.stringify(tasksData)});
 
       setInputValue('');
    }
