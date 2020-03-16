@@ -5,6 +5,7 @@ import ClearAll from './ClearAll';
 import fire from '../config/Fire';
 import { useSelector, useDispatch } from 'react-redux';
 import {setUserData} from '../redux/actions';
+import { Redirect } from 'react-router-dom';
 
 require("firebase/firestore");
 
@@ -48,8 +49,10 @@ const Body = () => {
                   .collection('users')
                   .doc(userEmail)
                   .set({
-                     tasks: '[]'
-                  });
+                     tasks: '[{"id":0,"task":"Welcome","completed":false}]'
+                  }).then((e) => {
+                     getUserData(userEmail);
+                  })
             }
          }).catch(err => {
             console.log('Get user data error: ', err);
@@ -58,8 +61,9 @@ const Body = () => {
    };
 
    useEffect(() => {
-      getUserData(user.email);
-   }, []);
+      if(user) getUserData(user.email);
+      
+   }, [user]);
 
    let jsonData = '[]';
    if (userData != null) jsonData = userData.tasks;
@@ -97,6 +101,7 @@ const Body = () => {
 
    return (
       <div className="Body">
+         {!user && <Redirect to='/login'/>}
          <AddTask
             setUserDataFn={setUserDataFn}
          />

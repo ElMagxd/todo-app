@@ -1,13 +1,14 @@
 import React from 'react';
 import fire from '../config/Fire';
 import { useDispatch } from 'react-redux';
-import { updateUserInfo } from '../redux/actions';
+import { updateUserInfo, setUserData } from '../redux/actions';
 
-const LogoutButton = () => {
+const LogoutButton = props => {
    const dispatch = useDispatch();
-   const logout = () => {
-      fire.auth().signOut();
+   const logout = async () => {
+      await fire.auth().signOut();
       dispatch(updateUserInfo(null));
+      dispatch(setUserData(null));
    }
    return (
       <button

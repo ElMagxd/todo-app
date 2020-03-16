@@ -7,21 +7,22 @@ const Login = props => {
    const [password, setPassword] = useState('');
    const [errorMessage, setErrorMessage] = useState('');
 
-   const login = e => {
+   const signup = e => {
       e.preventDefault();
       fire
          .auth()
-         .signInWithEmailAndPassword(email, password)
-         .then(u => {
+         .createUserWithEmailAndPassword(email, password)
+         .then(() => {
             props.history.push('/dashboard');
-         }).catch(err => {
+         })
+         .catch(err => {
             setErrorMessage(err.message);
          });
    }
 
    return (
       <main className='login'>
-         <form onSubmit={login}>
+         <form onSubmit={signup}>
             <input
                placeholder='Email'
                type='email'
@@ -36,9 +37,10 @@ const Login = props => {
             />
             <button
                type='submit'
-               className='login__btn'
+               onClick={signup}
+               className='login__signup'
             >
-               Log in
+               Sign up
             </button>
             {
                errorMessage && 
@@ -46,9 +48,8 @@ const Login = props => {
                   {errorMessage}
                </p>
             }
-            
          </form>
-         <p>Don't have an account? <Link to='/signup'>Sign up</Link></p>
+         <p>Already have an account? <Link to='/login'>Log in</Link></p>
       </main>
    );
 };
