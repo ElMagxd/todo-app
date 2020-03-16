@@ -5,10 +5,15 @@ import { Link } from 'react-router-dom';
 const Login = props => {
    const [email, setEmail] = useState('');
    const [password, setPassword] = useState('');
+   const [passwordConfiramtion, setPasswordConfiramtion] = useState('');
    const [errorMessage, setErrorMessage] = useState('');
 
    const signup = e => {
       e.preventDefault();
+      if(password !== passwordConfiramtion) {
+         setErrorMessage('Passwords do not match');
+         return;
+      }
       fire
          .auth()
          .createUserWithEmailAndPassword(email, password)
@@ -34,6 +39,12 @@ const Login = props => {
                type='password'
                onChange={e => setPassword(e.target.value)}
                value={password}
+            />
+            <input
+               placeholder='Confirm password'
+               type='password'
+               onChange={e => setPasswordConfiramtion(e.target.value)}
+               value={passwordConfiramtion}
             />
             <button
                type='submit'
