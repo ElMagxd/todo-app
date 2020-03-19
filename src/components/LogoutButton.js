@@ -5,11 +5,13 @@ import { updateUserInfo, setUserData } from '../redux/actions';
 
 const LogoutButton = props => {
    const dispatch = useDispatch();
+
    const logout = async () => {
       await fire.auth().signOut();
       dispatch(updateUserInfo(null));
       dispatch(setUserData(null));
    }
+   
    return (
       <button
             className='logout-button'

@@ -7,10 +7,7 @@ const AddTask = props => {
    const userData = useSelector(state => state.userData);
    
    let tasksData;
-   // localStorage.length < 1 ? tasksData = [] : tasksData = JSON.parse(localStorage.getItem('tasksData'));
    !userData ? tasksData = [] : tasksData = JSON.parse(userData.tasks);
-
-   // const setJsonData = props.setState;
 
    const changedInputValue = event => {
       setInputValue(event.target.value);

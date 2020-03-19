@@ -62,7 +62,7 @@ const Body = () => {
 
    useEffect(() => {
       if(user) getUserData(user.email);
-      
+      console.log('useEffect...')
    }, [user]);
 
    let jsonData = '[]';
