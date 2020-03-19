@@ -6,9 +6,8 @@ const ClearAll = props => {
    const user = useSelector(state => state.user);
 
    const clearAllData = () => {
-      localStorage.clear();
       const newState = props.setState;
-      newState(user.email, {tasks: '[]'});
+      newState(user.email, { tasks: '[]' });
    }
 
    return (

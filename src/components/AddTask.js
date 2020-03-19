@@ -5,7 +5,7 @@ const AddTask = props => {
    const [inputValue, setInputValue] = useState('');
    const user = useSelector(state => state.user);
    const userData = useSelector(state => state.userData);
-   
+
    let tasksData;
    !userData ? tasksData = [] : tasksData = JSON.parse(userData.tasks);
 
@@ -35,7 +35,7 @@ const AddTask = props => {
       };
       tasksData.push(newTask);
       const setFireData = props.setUserDataFn;
-      setFireData(user.email, {tasks: JSON.stringify(tasksData)});
+      setFireData(user.email, { tasks: JSON.stringify(tasksData) });
 
       setInputValue('');
    }

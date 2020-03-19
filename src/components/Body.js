@@ -4,9 +4,8 @@ import AddTask from './AddTask';
 import ClearAll from './ClearAll';
 import fire from '../config/Fire';
 import { useSelector, useDispatch } from 'react-redux';
-import {setUserData} from '../redux/actions';
+import { setUserData } from '../redux/actions';
 import { Redirect } from 'react-router-dom';
-
 require("firebase/firestore");
 
 const Body = () => {
@@ -28,14 +27,14 @@ const Body = () => {
          });
    }
 
-   const getUserData = (userEmail) => {
+   const getUserData = userEmail => {
       db
          .collection('users')
          .doc(userEmail)
          .get()
          .then(doc => {
-            if(doc.exists) {
-               if(doc.data().tasks === undefined) {
+            if (doc.exists) {
+               if (doc.data().tasks === undefined) {
                   let dataObj = {
                      tasks: '[]'
                   };
@@ -57,12 +56,10 @@ const Body = () => {
          }).catch(err => {
             console.log('Get user data error: ', err);
          });
-      return userData;
    };
 
    useEffect(() => {
-      if(user) getUserData(user.email);
-      console.log('useEffect...')
+      if (user) getUserData(user.email);
    }, [user]);
 
    let jsonData = '[]';
@@ -73,14 +70,14 @@ const Body = () => {
       const index = newData.map(item => item.id).indexOf(id);
       let isCompleted = newData[index].completed;
       newData[index].completed = !isCompleted;
-      setUserDataFn(user.email, {tasks: JSON.stringify(newData)});
+      setUserDataFn(user.email, { tasks: JSON.stringify(newData) });
    }
 
    const deleteItem = id => {
       let newData = JSON.parse(jsonData);
       const index = newData.map(item => item.id).indexOf(id);
       newData.splice(index, 1);
-      setUserDataFn(user.email, {tasks: JSON.stringify(newData)});
+      setUserDataFn(user.email, { tasks: JSON.stringify(newData) });
    }
 
    const activeTasks = JSON.parse(jsonData).filter(task => task.completed === false);
@@ -101,14 +98,12 @@ const Body = () => {
 
    return (
       <div className="Body">
-         {!user && <Redirect to='/login'/>}
-         <AddTask
-            setUserDataFn={setUserDataFn}
-         />
+         {!user && <Redirect to="/login" />}
+         <AddTask setUserDataFn={setUserDataFn} />
 
          {finalTasks}
-         
-         {JSON.parse(jsonData).length > 0 ? <ClearAll setState={setUserDataFn}/> : null}
+
+         {JSON.parse(jsonData).length > 0 ? <ClearAll setState={setUserDataFn} /> : null}
       </div>
    );
 };

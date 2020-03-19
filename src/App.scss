@@ -1,4 +1,5 @@
-$slab: 'Roboto Slab', serif;
+$slab: 'Roboto Slab',
+serif;
 
 * {
    margin: 0;
@@ -6,7 +7,8 @@ $slab: 'Roboto Slab', serif;
    box-sizing: border-box;
 }
 
-ul, li {
+ul,
+li {
    display: block;
    list-style: none;
 }
@@ -67,7 +69,32 @@ h1 {
    font-size: 28px;
 }
 
+.dashboard {
+   display: flex;
+}
+
+.sidebar {
+   width: 30%;
+   padding: 20px 0;
+   border-right: 2px solid #eee;
+
+   &__item {
+      height: 40px;
+      width: 100%;
+      border: none;
+      font-family: 'Roboto Slab', serif;
+      height: 40px;
+      padding: 0 25px;
+      cursor: pointer;
+      background-color: #00B06009;
+      text-align: left;
+      font-size: 16px;
+      outline: none;
+   }
+}
+
 .Body {
+   width: 100%;
    background-color: #fff;
    padding: 20px 40px;
    min-height: 90vh;
@@ -93,7 +120,7 @@ h1 {
       cursor: pointer;
    }
 
-   input:checked + .task__text {
+   input:checked+.task__text {
       text-decoration: line-through;
    }
 
@@ -104,12 +131,14 @@ h1 {
       opacity: 0;
       margin: 10px 0 0 20px;
    }
-   &__checkbox + label {
+
+   &__checkbox+label {
       position: relative;
       cursor: pointer;
       padding-left: 50px;
    }
-   &__checkbox + label:before {
+
+   &__checkbox+label:before {
       content: '';
       position: absolute;
       top: 50%;
@@ -122,7 +151,7 @@ h1 {
       transition: all .2s ease;
    }
 
-   &__checkbox:checked + label:before {
+   &__checkbox:checked+label:before {
       background: lightgreen;
    }
 
@@ -215,7 +244,7 @@ h1 {
       max-width: 600px;
       width: 90%;
       margin: 0 auto;
-      
+
       input {
          height: 40px;
          margin-bottom: 20px;
@@ -254,6 +283,30 @@ h1 {
    }
 }
 
+.preloader {
+   min-height: 100vh;
+   width: 100%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   flex-direction: column;
+   background-color: #fff;
+   position: fixed;
+
+   &-enter {
+      opacity: 1;
+   }
+
+   &-exit {
+      opacity: 1;
+
+      &-active {
+         opacity: 0;
+         transition: opacity 300ms;
+      }
+   }
+}
+
 
 @media (max-width: 992px) {
    .task {
@@ -279,7 +332,7 @@ h1 {
          margin-bottom: 5px;
       }
 
-      &__checkbox + label {
+      &__checkbox+label {
          padding-left: 40px;
          margin-right: 5px;
       }
@@ -292,7 +345,7 @@ h1 {
          font-size: 14px;
       }
 
-      &__checkbox + label {
+      &__checkbox+label {
          padding-left: 35px;
 
          &:before {
@@ -303,7 +356,9 @@ h1 {
    }
 
    .addTask {
-      input, button {
+
+      input,
+      button {
          font-size: 14px;
       }
    }
