@@ -1,0 +1,171 @@
+$slab: 'Roboto Slab',
+serif;
+
+.sidebar {
+   width: 30%;
+   padding: 20px 0;
+   border-right: 2px solid #eee;
+
+   &__list {}
+
+   &__item {
+      height: 40px;
+      width: 100%;
+      border: none;
+      font-family: $slab;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 10px 0 25px;
+      cursor: pointer;
+      background-color: #f6f6f6;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: all .3s ease;
+
+      &:not(:last-child) {
+         margin-bottom: 5px;
+      }
+
+      &:hover {
+         background-color: #f3f3f3;
+      }
+
+      &:hover .sidebar__item-delete {
+         opacity: .3;
+      }
+
+      &-delete {
+         border: none;
+         background-color: transparent;
+         transition: all .3s ease;
+         opacity: 0;
+         cursor: pointer;
+         padding: 10px 15px;
+         color: #000;
+         font-size: 16px;
+      }
+   }
+
+   &__add {
+      height: 40px;
+      width: 100%;
+      border: none;
+      font-family: $slab;
+      cursor: pointer;
+      background-color: transparent;
+      transition: all .3s ease;
+      margin-bottom: 10px;
+      font-size: 14px;
+      outline: none;
+
+      &:hover {
+         background-color: #00B06009;
+      }
+   }
+}
+
+.addTaskList {
+   position: fixed;
+   top: 0px;
+   left: 0px;
+   right: 0px;
+   bottom: 0px;
+   background-color: rgba(255, 255, 255, 0.75);
+
+   &__content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: #fff;
+      border: 2px solid #eee;
+      max-width: 500px;
+      width: 100%;
+   }
+
+   form {
+      display: flex;
+      flex-direction: column;
+      outline: none;
+
+      header {
+         width: 100%;
+
+         h1 {
+            text-align: center;
+            font-family: $slab;
+            font-size: 18px;
+            padding: 15px 0;
+            color: #000;
+            border-bottom: 1px solid #eee;
+         }
+      }
+
+      main {
+         padding: 20px 15px;
+
+         label {
+            font-size: 16px;
+         }
+
+         input {
+            display: block;
+            width: 100%;
+            margin-top: 5px;
+            border: 1px solid #eee;
+            height: 35px;
+            padding: 0 15px;
+            font-family: $slab;
+            font-size: 14px;
+         }
+      }
+
+      footer {
+         padding: 15px;
+         border-top: 1px solid #eee;
+         display: flex;
+         align-items: center;
+         justify-content: flex-end;
+
+         button {
+            height: 35px;
+            font-family: $slab;
+            border: none;
+            cursor: pointer;
+         }
+      }
+   }
+
+   &__close {
+      border: none;
+      background-color: transparent;
+      color: #aaa;
+      margin-right: 15px;
+   }
+
+   &__add {
+      padding: 0 20px;
+      background-color: #eee;
+      transition: all 0.3s ease;
+
+      &:hover {
+         background-color: rgb(224, 224, 224);
+      }
+   }
+}
+
+// React Modal Transition
+.ReactModal__Overlay {
+   opacity: 0;
+   transition: opacity 200ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open {
+   opacity: 1;
+}
+
+.ReactModal__Overlay--before-close {
+   opacity: 0;
+}

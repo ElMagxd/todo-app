@@ -73,33 +73,6 @@ h1 {
    display: flex;
 }
 
-.sidebar {
-   width: 30%;
-   padding: 20px 0;
-   border-right: 2px solid #eee;
-
-   &__item {
-      height: 40px;
-      width: 100%;
-      border: none;
-      font-family: 'Roboto Slab', serif;
-      height: 40px;
-      padding: 0 25px;
-      cursor: pointer;
-      background-color: #00B06009;
-      text-align: left;
-      font-size: 16px;
-      outline: none;
-   }
-}
-
-.Body {
-   width: 100%;
-   background-color: #fff;
-   padding: 20px 40px;
-   min-height: 90vh;
-}
-
 .task {
    padding: 15px 20px;
    border-bottom: 1px solid #ccc;

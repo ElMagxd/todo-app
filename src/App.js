@@ -10,32 +10,70 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateUserInfo } from './redux/actions';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { CSSTransition } from 'react-transition-group';
+import { setUserData } from './redux/actions';
 
 
 function App() {
 	const dispatch = useDispatch();
 	const user = useSelector(state => state.user);
-
 	const [authing, setAuthing] = useState(false);
+	const db = fire.firestore();
 
-	const authListener = async () => {
-		setAuthing(true);
-		fire.auth().onAuthStateChanged(user => {
-			if (user) {
-				dispatch(updateUserInfo(user));
-
-			} else {
-				dispatch(updateUserInfo(null));
+	let initialData = {
+		name: "First",
+		tasks: [
+			{
+				"id": 0,
+				"task": "Welcome",
+				"completed": false
+			},
+			{
+				"id": 1,
+				"task": "It's a new tasklist",
+				"completed": false
 			}
-			setAuthing(false);
-		});
+		]
+	};
+
+	const getUserData = userEmail => {
+		db
+			.collection('users')
+			.doc(userEmail)
+			.get()
+			.then(doc => {
+				if (doc.exists && doc.data().taskLists) {
+					dispatch(setUserData(doc.data()));
+				} else {
+					db
+						.collection('users')
+						.doc(userEmail)
+						.set({ taskLists: [initialData] })
+						.then((e) => {
+							getUserData(userEmail);
+						})
+				}
+			}).catch(err => {
+				console.log('Get user data error: ', err);
+			});
 	};
 
 	useEffect(() => {
-		authListener();
-	}, []);
+		const authListener = () => {
+			setAuthing(true);
+			fire.auth().onAuthStateChanged(user => {
+				if (user) {
+					dispatch(updateUserInfo(user));
 
-	// if (authing) { return <Preloader /> }
+				} else {
+					dispatch(updateUserInfo(null));
+				}
+				setAuthing(false);
+			});
+		};
+		authListener();
+
+		if (user) getUserData(user.email);
+	}, [user]);
 
 	return (
 		<>

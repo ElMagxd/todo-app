@@ -11,3 +11,10 @@ export const setUserData = newData => {
       payload: newData
    }
 }
+
+export const setCurrentList = newData => {
+   return {
+      type: 'UPDATE_CURRENTLIST',
+      payload: newData
+   }
+}

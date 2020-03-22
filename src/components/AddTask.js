@@ -5,37 +5,46 @@ const AddTask = props => {
    const [inputValue, setInputValue] = useState('');
    const user = useSelector(state => state.user);
    const userData = useSelector(state => state.userData);
-
-   let tasksData;
-   !userData ? tasksData = [] : tasksData = JSON.parse(userData.tasks);
+   const currentList = useSelector(state => state.currentList);
 
    const changedInputValue = event => {
       setInputValue(event.target.value);
    }
 
-   const makeUniqueId = () => {
-      if (tasksData.length < 1) {
+   const makeUniqueId = (arr) => {
+      if (arr.length < 1) {
          return 1;
       }
-      let objectId = tasksData.map(item => item.id);
+      let objectId = arr.map(item => item.id);
       let maxItem = Math.max(...objectId);
       return maxItem + 1;
    }
 
    const sendToLS = e => {
       e.preventDefault();
+
+      if (userData.taskLists.length < 1) {
+         // throw new Error('No list created');
+         console.warn('No list created. Create a new list. Then add tasks to it.');
+         return false;
+      }
+
       if (inputValue.length < 1) {
          return false
       }
 
+      let taskLists = userData.taskLists;
+
       let newTask = {
-         id: makeUniqueId(),
+         id: makeUniqueId(taskLists[currentList].tasks),
          task: inputValue,
          completed: false
       };
-      tasksData.push(newTask);
+
+      taskLists[currentList].tasks.push(newTask);
+
       const setFireData = props.setUserDataFn;
-      setFireData(user.email, { tasks: JSON.stringify(tasksData) });
+      setFireData(user.email, { taskLists: taskLists });
 
       setInputValue('');
    }

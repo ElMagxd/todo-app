@@ -8,12 +8,12 @@ const Task = props => {
          <input
             className="task__checkbox"
             type="checkbox"
-            defaultChecked={props.completed}
+            // defaultChecked={props.completed}
+            checked={props.completed}
             onChange={props.handleChange}
             id={`taskCheckBox-${props.taskId}`}
          />
          <label htmlFor={`taskCheckBox-${props.taskId}`} className="task__text">{props.text}</label>
-         
          <button
             className="task__delete"
             onClick={props.deleteFn}
