@@ -30,13 +30,18 @@ const Body = () => {
       dispatch(setUserData(data));
    }
 
-   if (userData && userData.taskLists.length) {
+   /*if (userData && userData.taskLists.length) {
       if (userData.taskLists.length <= currentList) {
          currentListTasks = userData.taskLists[userData.taskLists.length - 1].tasks;
       } else {
          currentListTasks = userData.taskLists[currentList].tasks;
       }
+   }*/
+   if (userData && userData.taskLists.length) {
+      currentListTasks = userData.taskLists[currentList].tasks;
    }
+
+
 
    const handleChange = id => {
       const index = currentListTasks.map(item => item.id).indexOf(id);

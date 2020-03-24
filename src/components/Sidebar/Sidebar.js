@@ -12,7 +12,7 @@ const Sidebar = () => {
    const [inputValue, setInputValue] = useState('');
    const user = useSelector(state => state.user);
    const userData = useSelector(state => state.userData);
-   // const currentList = useSelector(state => state.currentList);
+   const currentList = useSelector(state => state.currentList);
    const dispatch = useDispatch();
    const db = fire.firestore();
    let taskList;
@@ -24,10 +24,16 @@ const Sidebar = () => {
    const addNewTaskList = e => {
       e.preventDefault();
       if (inputValue.length >= 1) {
+
+         let shortInputValue = inputValue;
+         // if (inputValue.length > 30) {
+         //    shortInputValue = shortInputValue.slice(0, 27) + '...';
+         // }
+
          setModalIsOpen(false);
 
          let newObj = {
-            name: inputValue,
+            name: shortInputValue,
             tasks: []
          };
 
@@ -41,6 +47,8 @@ const Sidebar = () => {
                dispatch(setCurrentList(userData.taskLists.length - 1));
             });
       }
+
+      setInputValue('');
    }
 
    const addBtnHandler = () => {
@@ -63,8 +71,13 @@ const Sidebar = () => {
          .doc(user.email)
          .set({ taskLists: taskList })
          .then(e => {
-            dispatch(setUserData({ taskLists: taskList }));
+            // dispatch(setUserData({ taskLists: taskList }));
          });
+      dispatch(setUserData({ taskLists: taskList }));
+
+      if (currentList >= userData.taskLists.length) {
+         dispatch(setCurrentList(currentList - 1))
+      }
    }
 
    return (
@@ -81,7 +94,7 @@ const Sidebar = () => {
                taskList.map((item, index) => {
                   return (
                      <li
-                        className="sidebar__item"
+                        className={"sidebar__item " + (currentList === index ? "active" : null)}
                         onClick={() => changeList(index)}
                         key={index}
                      >
@@ -118,7 +131,11 @@ const Sidebar = () => {
                <main>
                   <label>
                      Task list name
-                     <input placeholder='e.g. "Shopping list"' onChange={e => setInputValue(e.target.value)} />
+                     <input
+                        placeholder='e.g. "Shopping list"'
+                        onChange={e => setInputValue(e.target.value)}
+                        maxLength="60"
+                     />
                   </label>
                </main>
                <footer>

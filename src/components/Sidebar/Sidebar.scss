@@ -2,20 +2,19 @@ $slab: 'Roboto Slab',
 serif;
 
 .sidebar {
-   width: 30%;
+   // width: 30%;
    padding: 20px 0;
-   border-right: 2px solid #eee;
+   // border-right: 2px solid #eee;
 
    &__list {}
 
    &__item {
-      height: 40px;
+      min-height: 40px;
       width: 100%;
       border: none;
       font-family: $slab;
-      height: 40px;
-      line-height: 40px;
-      padding: 0 10px 0 25px;
+      line-height: 1.45em;
+      padding: 5px 10px 5px 25px;
       cursor: pointer;
       background-color: #f6f6f6;
       font-size: 16px;
@@ -24,12 +23,22 @@ serif;
       justify-content: space-between;
       transition: all .3s ease;
 
+      span {
+
+         word-break: break-word;
+      }
+
       &:not(:last-child) {
          margin-bottom: 5px;
       }
 
       &:hover {
-         background-color: #f3f3f3;
+         background-color: #eee;
+      }
+
+      &.active {
+         background-color: #eee;
+         color: green;
       }
 
       &:hover .sidebar__item-delete {
