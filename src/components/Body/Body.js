@@ -1,6 +1,6 @@
 import React from 'react';
 import Task from '../Task';
-import AddTask from '../AddTask';
+import AddTask from '../AddTask/AddTask';
 import ClearAll from '../ClearAll';
 import fire from '../../config/Fire';
 import { useSelector, useDispatch } from 'react-redux';
